@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-latex
 Version:	20110629
-Release:	2
+Release:	3
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
@@ -14,6 +14,14 @@ License:	LPPL
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.doc.tar.xz
 Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.source.tar.xz
+# revision 23398
+# category TLCore
+# catalog-ctan undef
+# catalog-date undef
+# catalog-license undef
+# catalog-version undef
+Source3:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.tar.xz
+Source4:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.doc.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
 Requires(pre):	texlive-tlpkg
@@ -24,6 +32,7 @@ Requires:	texlive-latexconfig
 Requires:	texlive-latex-fonts
 %rename tetex-latex
 %rename texlive-texmf-latex
+%rename texlive-latex-bin
 Conflicts:	texlive-texmf <= 20110705-3
 Conflicts:	texlive-doc <= 20110705-3
 Conflicts:	texlive-source <= 20110705-3
@@ -47,22 +56,27 @@ entries above.
 
 %pre
     %_texmf_mktexlsr_pre
+    %_texmf_fmtutil_pre
 
 %post
     %_texmf_mktexlsr_post
+    %_texmf_fmtutil_post
 
 %preun
     if [ $1 -eq 0 ]; then
 	%_texmf_mktexlsr_pre
+	%_texmf_fmtutil_pre
     fi
 
 %postun
     if [ $1 -eq 0 ]; then
+	%_texmf_fmtutil_post
 	%_texmf_mktexlsr_post
     fi
 
 #-----------------------------------------------------------------------
 %files
+%_texmf_fmtutil_d/latex
 %{_texmfdistdir}/makeindex/latex/gglo.ist
 %{_texmfdistdir}/makeindex/latex/gind.ist
 %{_texmfdistdir}/tex/latex/base/alltt.sty
@@ -390,16 +404,29 @@ entries above.
 %doc %{_texmfdistdir}/source/latex/base/usrguide.tex
 %doc %{_texmfdistdir}/source/latex/base/utf8ienc.dtx
 %doc %{_texmfdistdir}/source/latex/base/webcomp.err
+%doc %{_mandir}/man1/latex.1*
+%doc %{_texmfdir}/doc/man/man1/latex.man1.pdf
+%doc %{_mandir}/man1/pdflatex.1*
+%doc %{_texmfdir}/doc/man/man1/pdflatex.man1.pdf
 %doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
-%setup -c -a0 -a1 -a2
+%setup -c -a0 -a1 -a2 -a3 -a4
 
 %build
 
 %install
+mkdir -p %{buildroot}%{_datadir}
+cp -fpar texmf %{buildroot}%{_datadir}
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar makeindex tex doc source %{buildroot}%{_texmfdistdir}
 mkdir -p %{buildroot}%{_tlpkgobjdir}
 cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
+mkdir -p %{buildroot}%{_texmf_fmtutil_d}
+cat > %{buildroot}%{_texmf_fmtutil_d}/latex <<EOF
+latex pdftex language.dat -translate-file=cp227.tcx *latex.ini
+pdflatex pdftex language.dat -translate-file=cp227.tcx *pdflatex.ini
+dvilualatex luatex language.dat,language.dat.lua dvilualatex.ini
+lualatex luatex language.dat,language.dat.lua lualatex.ini
+EOF
