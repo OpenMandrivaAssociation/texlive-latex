@@ -26,6 +26,7 @@ BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
 Requires(pre):	texlive-tlpkg
 Requires(post):	texlive-kpathsea
+Requires(post):	texlive-tetex
 Requires:	texlive-luatex
 Requires:	texlive-pdftex
 Requires:	texlive-latexconfig
