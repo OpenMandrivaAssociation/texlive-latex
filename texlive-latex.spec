@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-latex
 Version:	20110629
-Release:	4
+Release:	5
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
@@ -24,18 +24,19 @@ Source3:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.tar.xz
 Source4:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.doc.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
-Requires(post):	texlive-tetex
+Requires(pre):	texlive-kpathsea.bin texlive-tlpkg
+Requires(post):	texlive-kpathsea.bin texlive-tlpkg
+Requires(preun):texlive-kpathsea.bin texlive-tlpkg
+Requires(postun):texlive-kpathsea.bin texlive-tlpkg
 Requires:	texlive-luatex
 Requires:	texlive-pdftex
 Requires:	texlive-latexconfig
 Requires:	texlive-latex-fonts
 Requires:	texlive-latex.bin
 %rename texlive-latex-bin
-Conflicts:	texlive-texmf <= 20110705-3
-Conflicts:	texlive-doc <= 20110705-3
-Conflicts:	texlive-source <= 20110705-3
+Conflicts:	texlive-texmf < 20110705-4
+Conflicts:	texlive-doc < 20110705-4
+Conflicts:	texlive-source < 20110705-4
 
 %description
 LaTeX is a widely-used macro package for TeX, providing many
