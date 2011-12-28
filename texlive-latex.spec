@@ -34,9 +34,6 @@ Requires:	texlive-latexconfig
 Requires:	texlive-latex-fonts
 Requires:	texlive-latex.bin
 %rename texlive-latex-bin
-Conflicts:	texlive-texmf < 20110705-4
-Conflicts:	texlive-doc < 20110705-4
-Conflicts:	texlive-source < 20110705-4
 
 %description
 LaTeX is a widely-used macro package for TeX, providing many
@@ -55,24 +52,12 @@ writing, font encodings, configuration options and modification
 of LaTeX. For downloading details, see the linked catalogue
 entries above.
 
-%pre
-    %_texmf_mktexlsr_pre
-    %_texmf_fmtutil_pre
-
 %post
-    %_texmf_mktexlsr_post
-    %_texmf_fmtutil_post
-
-%preun
-    if [ $1 -eq 0 ]; then
-	%_texmf_mktexlsr_pre
-	%_texmf_fmtutil_pre
-    fi
+    %{_sbindir}/texlive.post
 
 %postun
-    if [ $1 -eq 0 ]; then
-	%_texmf_fmtutil_post
-	%_texmf_mktexlsr_post
+    if [ \$1 -eq 0 ]; then
+	%{_sbindir}/texlive.post
     fi
 
 #-----------------------------------------------------------------------
@@ -409,7 +394,6 @@ entries above.
 %doc %{_texmfdir}/doc/man/man1/latex.man1.pdf
 %doc %{_mandir}/man1/pdflatex.1*
 %doc %{_texmfdir}/doc/man/man1/pdflatex.man1.pdf
-%doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
@@ -424,8 +408,6 @@ mkdir -p %{buildroot}%{_mandir}/man1
 mv %{buildroot}%{_texmfdir}/doc/man/man1/*.1 %{buildroot}%{_mandir}/man1
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar makeindex tex doc source %{buildroot}%{_texmfdistdir}
-mkdir -p %{buildroot}%{_tlpkgobjdir}
-cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
 mkdir -p %{buildroot}%{_texmf_fmtutil_d}
 cat > %{buildroot}%{_texmf_fmtutil_d}/latex <<EOF
 latex pdftex language.dat -translate-file=cp227.tcx *latex.ini
