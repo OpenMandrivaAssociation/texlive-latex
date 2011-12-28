@@ -56,7 +56,7 @@ entries above.
     %{_sbindir}/texlive.post
 
 %postun
-    if [ \$1 -eq 0 ]; then
+    if [ $1 -eq 0 ]; then
 	%{_sbindir}/texlive.post
     fi
 
