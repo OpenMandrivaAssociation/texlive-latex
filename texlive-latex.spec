@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-latex
 Version:	20110629
-Release:	6
+Release:	7
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
