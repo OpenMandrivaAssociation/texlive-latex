@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-latex
 Version:	20110629
-Release:	7
+Release:	8
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
@@ -24,10 +24,9 @@ Source3:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.tar.xz
 Source4:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.doc.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-kpathsea.bin texlive-tlpkg
-Requires(post):	texlive-kpathsea.bin texlive-tlpkg
-Requires(preun):texlive-kpathsea.bin texlive-tlpkg
-Requires(postun):texlive-kpathsea.bin texlive-tlpkg
+Requires(pre):	texlive-tlpkg
+Requires(post):	texlive-kpathsea
+Requires(post):	texlive-tetex
 Requires:	texlive-luatex
 Requires:	texlive-pdftex
 Requires:	texlive-latexconfig
@@ -410,6 +409,8 @@ mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar makeindex tex doc source %{buildroot}%{_texmfdistdir}
 mkdir -p %{buildroot}%{_texmf_fmtutil_d}
 cat > %{buildroot}%{_texmf_fmtutil_d}/latex <<EOF
+#
+# from latex-bin:
 latex pdftex language.dat -translate-file=cp227.tcx *latex.ini
 pdflatex pdftex language.dat -translate-file=cp227.tcx *pdflatex.ini
 dvilualatex luatex language.dat,language.dat.lua dvilualatex.ini
