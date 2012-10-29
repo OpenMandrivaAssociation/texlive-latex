@@ -1,11 +1,11 @@
-# revision 23639
+# revision 27907
 # category Package
 # catalog-ctan undef
-# catalog-date 2011-06-29 21:13:30 +0200
-# catalog-license lppl
+# catalogue-date 2012-07-07 16:18:52 +0200
+# catalogue-license lppl
 # catalog-version undef
 Name:		texlive-latex
-Version:	20110629
+Version:	20120707
 Release:	9
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
