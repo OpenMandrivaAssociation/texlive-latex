@@ -1,7 +1,6 @@
----
 sources:
-  latex-bin.doc.tar.xz: 7e53e49e12fb42ff85c4970861e11804809ffa0c
-  latex-bin.tar.xz: c46010aee9b66cfea279de68721946db3c7d2529
+  latex-bin.doc.tar.xz: cfdff25c673134dc2f18968d8cd0bc44960f57e0
+  latex-bin.tar.xz: 19fc24f10a2d6e85849ae827754db0fd8892f25c
   latex.doc.tar.xz: 4c99de95d7234ca1df847373f4a098f9b33422aa
   latex.source.tar.xz: eb584e6ab1648dc84caf248f277e2dfe56ee4b95
   latex.tar.xz: 1c85dbaba981fa283f94e2d2bd77cde69989677b

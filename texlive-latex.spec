@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-latex
 Version:	20120707
-Release:	10
+Release:	11
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
@@ -14,7 +14,7 @@ License:	LPPL
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.doc.tar.xz
 Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.source.tar.xz
-# revision 23398
+# revision 29764
 # category TLCore
 # catalog-ctan undef
 # catalog-date undef
@@ -390,9 +390,9 @@ entries above.
 %doc %{_texmfdistdir}/source/latex/base/utf8ienc.dtx
 %doc %{_texmfdistdir}/source/latex/base/webcomp.err
 %doc %{_mandir}/man1/latex.1*
-%doc %{_texmfdir}/doc/man/man1/latex.man1.pdf
+%doc %{_texmfdistdir}/doc/man/man1/latex.man1.pdf
 %doc %{_mandir}/man1/pdflatex.1*
-%doc %{_texmfdir}/doc/man/man1/pdflatex.man1.pdf
+%doc %{_texmfdistdir}/doc/man/man1/pdflatex.man1.pdf
 
 #-----------------------------------------------------------------------
 %prep
@@ -402,9 +402,9 @@ entries above.
 
 %install
 mkdir -p %{buildroot}%{_datadir}
-cp -fpar texmf %{buildroot}%{_datadir}
+cp -fpar texmf-dist %{buildroot}%{_datadir}
 mkdir -p %{buildroot}%{_mandir}/man1
-mv %{buildroot}%{_texmfdir}/doc/man/man1/*.1 %{buildroot}%{_mandir}/man1
+mv %{buildroot}%{_texmfdistdir}/doc/man/man1/*.1 %{buildroot}%{_mandir}/man1
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar makeindex tex doc source %{buildroot}%{_texmfdistdir}
 mkdir -p %{buildroot}%{_texmf_fmtutil_d}
