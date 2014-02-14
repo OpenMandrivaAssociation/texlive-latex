@@ -1,12 +1,12 @@
-# revision 27907
+# revision 32901
 # category Package
 # catalog-ctan undef
-# catalogue-date 2012-07-07 16:18:52 +0200
-# catalogue-license lppl
+# catalog-date 2013-03-06 18:48:43 +0100
+# catalog-license lppl
 # catalog-version undef
 Name:		texlive-latex
-Version:	20120707
-Release:	15
+Version:	20130306
+Release:	1
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
