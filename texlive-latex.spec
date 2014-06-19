@@ -1,4 +1,4 @@
-# revision 32901
+# revision 34069
 # category Package
 # catalog-ctan undef
 # catalog-date 2013-03-06 18:48:43 +0100
@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-latex
 Version:	20130306
-Release:	2
+Release:	3
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
@@ -14,33 +14,22 @@ License:	LPPL
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.doc.tar.xz
 Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.source.tar.xz
-# revision 29764
-# category TLCore
-# catalog-ctan undef
-# catalog-date undef
-# catalog-license undef
-# catalog-version undef
-Source3:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.tar.xz
-Source4:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex-bin.doc.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
 Requires(pre):	texlive-tlpkg
 Requires(post):	texlive-kpathsea
-Requires(post):	texlive-tetex
 Requires:	texlive-luatex
 Requires:	texlive-pdftex
 Requires:	texlive-latexconfig
 Requires:	texlive-latex-fonts
-Requires:	texlive-latex.bin
-%rename texlive-latex-bin
 
 %description
 LaTeX is a widely-used macro package for TeX, providing many
 basic document formating commands extended by a wide range of
-packages. It is a development of Leslie Lamport's original
-LaTeX 2.09, and superseded the older system in June 1994. The
-basic distribution is catalogued separately, at latex-base;
-apart from a large set of contributed packages and third-party
+packages. It is a development of Leslie Lamport's LaTeX 2.09,
+and superseded the older system in June 1994. The basic
+distribution is catalogued separately, at latex-base; apart
+from a large set of contributed packages and third-party
 documentation (elsewhere on the archive), the distribution
 includes: - a bunch of required packages, which LaTeX authors
 are "entitled to assume" will be present on any system running
@@ -61,7 +50,6 @@ entries above.
 
 #-----------------------------------------------------------------------
 %files
-%_texmf_fmtutil_d/latex
 %{_texmfdistdir}/makeindex/latex/gglo.ist
 %{_texmfdistdir}/makeindex/latex/gind.ist
 %{_texmfdistdir}/tex/latex/base/alltt.sty
@@ -94,6 +82,7 @@ entries above.
 %{_texmfdistdir}/tex/latex/base/flafter.sty
 %{_texmfdistdir}/tex/latex/base/fleqn.clo
 %{_texmfdistdir}/tex/latex/base/fleqn.sty
+%{_texmfdistdir}/tex/latex/base/fltrace.sty
 %{_texmfdistdir}/tex/latex/base/fontenc.sty
 %{_texmfdistdir}/tex/latex/base/fontmath.cfg
 %{_texmfdistdir}/tex/latex/base/fontmath.ltx
@@ -349,6 +338,7 @@ entries above.
 %doc %{_texmfdistdir}/source/latex/base/ltnews18.tex
 %doc %{_texmfdistdir}/source/latex/base/ltnews19.tex
 %doc %{_texmfdistdir}/source/latex/base/ltnews20.tex
+%doc %{_texmfdistdir}/source/latex/base/ltnews21.tex
 %doc %{_texmfdistdir}/source/latex/base/ltoutenc.dtx
 %doc %{_texmfdistdir}/source/latex/base/ltoutenc.ins
 %doc %{_texmfdistdir}/source/latex/base/ltoutput.dtx
@@ -389,30 +379,13 @@ entries above.
 %doc %{_texmfdistdir}/source/latex/base/usrguide.tex
 %doc %{_texmfdistdir}/source/latex/base/utf8ienc.dtx
 %doc %{_texmfdistdir}/source/latex/base/webcomp.err
-%doc %{_mandir}/man1/latex.1*
-%doc %{_texmfdistdir}/doc/man/man1/latex.man1.pdf
-%doc %{_mandir}/man1/pdflatex.1*
-%doc %{_texmfdistdir}/doc/man/man1/pdflatex.man1.pdf
 
 #-----------------------------------------------------------------------
 %prep
-%setup -c -a0 -a1 -a2 -a3 -a4
+%setup -c -a0 -a1 -a2
 
 %build
 
 %install
-mkdir -p %{buildroot}%{_datadir}
-cp -fpar texmf-dist %{buildroot}%{_datadir}
-mkdir -p %{buildroot}%{_mandir}/man1
-mv %{buildroot}%{_texmfdistdir}/doc/man/man1/*.1 %{buildroot}%{_mandir}/man1
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar makeindex tex doc source %{buildroot}%{_texmfdistdir}
-mkdir -p %{buildroot}%{_texmf_fmtutil_d}
-cat > %{buildroot}%{_texmf_fmtutil_d}/latex <<EOF
-#
-# from latex-bin:
-latex pdftex language.dat -translate-file=cp227.tcx *latex.ini
-pdflatex pdftex language.dat -translate-file=cp227.tcx *pdflatex.ini
-dvilualatex luatex language.dat,language.dat.lua dvilualatex.ini
-lualatex luatex language.dat,language.dat.lua lualatex.ini
-EOF
