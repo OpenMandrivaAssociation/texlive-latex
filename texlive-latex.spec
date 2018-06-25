@@ -1,5 +1,5 @@
 Name:		texlive-latex
-Version:	20170417
+Version:	20180529
 Release:	1
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
