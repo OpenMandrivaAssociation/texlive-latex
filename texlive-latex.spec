@@ -1,6 +1,6 @@
 Name:		texlive-latex
-Version:	65161
-Release:	2
+Version:	67413
+Release:	1
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
 URL:		http://tug.org/texlive
