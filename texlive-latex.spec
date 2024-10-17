@@ -3,7 +3,7 @@ Version:	71629
 Release:	1
 Summary:	A TeX macro package that defines LaTeX
 Group:		Publishing
-URL:		http://tug.org/texlive
+URL:		https://tug.org/texlive
 License:	LPPL
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.r%{version}.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latex.doc.r%{version}.tar.xz
